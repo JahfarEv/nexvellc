@@ -59,7 +59,7 @@ const products = [
   {
     name: "PocketStor",
     tagline: "Marketplace Platform for Shop Owners & Customers",
-    image: "/src/assets/App Icon.png", // or require('/assets/Logo PNGG.png')
+    image: "/App Icon.png", // or require('/assets/Logo PNGG.png')
     gradient: "from-indigo-50 to-blue-50",
     description:
       "PocketStor is a comprehensive marketplace platform that connects shop owners with customers in their locality. Shop owners can register, list products, and manage orders while customers can discover local shops, search by location or product name, and place orders easily.",
@@ -68,7 +68,7 @@ const products = [
   {
     name: "Pasil.in",
     tagline: "Innovative Video Rental Platform",
-    image: "/src/assets/Logo PNGG.png", // or require('/assets/App Icon.png')
+    image: "/Logo PNGG.png", // or require('/assets/App Icon.png')
     gradient: "from-purple-50 to-pink-50",
     description:
       "Pasil is an innovative video rental platform providing access to a wide range of self-help and motivational videos. Rent videos for specific durations, get AI-powered recommendations, and watch on any device with offline viewing support.",
@@ -969,10 +969,10 @@ const Career = () => {
 
   // Function to handle application form download
   const downloadApplicationForm = () => {
-    const formUrl = "/application-form.pdf";
+    const formUrl = "/Nexus_Ventures_Official_Form.pdf";
     const link = document.createElement("a");
     link.href = formUrl;
-    link.download = "Nexus_Ventures_Application_Form.pdf";
+    link.download = "Nexus_Ventures_Official_Form.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
