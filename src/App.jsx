@@ -38,20 +38,20 @@ const staggerContainer = {
 // Card hover animation variants
 const cardHoverVariants = {
   initial: { scale: 1, y: 0 },
-  hover: { 
-    scale: 1.02, 
+  hover: {
+    scale: 1.02,
     y: -8,
-    transition: { duration: 0.3, type: "spring", stiffness: 300 }
-  }
+    transition: { duration: 0.3, type: "spring", stiffness: 300 },
+  },
 };
 
 const iconVariants = {
   initial: { rotate: 0, scale: 1 },
-  hover: { 
+  hover: {
     rotate: [0, -10, 10, -5, 5, 0],
     scale: 1.1,
-    transition: { duration: 0.5 }
-  }
+    transition: { duration: 0.5 },
+  },
 };
 
 // Products Data
@@ -59,19 +59,19 @@ const products = [
   {
     name: "PocketStor",
     tagline: "Marketplace Platform for Shop Owners & Customers",
-    icon: "📦",
+    image: "/src/assets/App Icon.png", // or require('/assets/Logo PNGG.png')
     gradient: "from-indigo-50 to-blue-50",
     description:
       "PocketStor is a comprehensive marketplace platform that connects shop owners with customers in their locality. Shop owners can register, list products, and manage orders while customers can discover local shops, search by location or product name, and place orders easily.",
     website: "https://poketstor.com/",
   },
   {
-    name: "Phasil.in",
+    name: "Pasil.in",
     tagline: "Innovative Video Rental Platform",
-    icon: "🎬",
+    image: "/src/assets/Logo PNGG.png", // or require('/assets/App Icon.png')
     gradient: "from-purple-50 to-pink-50",
     description:
-      "Phasil is an innovative video rental platform providing access to a wide range of self-help and motivational videos. Rent videos for specific durations, get AI-powered recommendations, and watch on any device with offline viewing support.",
+      "Pasil is an innovative video rental platform providing access to a wide range of self-help and motivational videos. Rent videos for specific durations, get AI-powered recommendations, and watch on any device with offline viewing support.",
     website: "https://pasil.in/",
   },
 ];
@@ -141,7 +141,7 @@ const Navbar = () => {
       transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-gray-100"
+          ? "bg-white/95 backdrop-blur-xl shadow-2xl border-b border-gray-100"
           : "bg-white/80 backdrop-blur-md border-b border-gray-100/50"
       } py-3 px-6 md:px-12`}
     >
@@ -162,7 +162,7 @@ const Navbar = () => {
           </motion.div>
           <div>
             <span className="text-2xl font-bold tracking-tight text-gray-800">
-              Nexve <span className="text-[#2E8A99]">LLC</span>
+              NEXUS <span className="text-[#2E8A99]">VENTURES</span>
             </span>
           </div>
         </div>
@@ -300,7 +300,7 @@ const Hero = () => {
       animate={controls}
       initial="hidden"
       variants={fadeUpVariant}
-      className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30"
+      className="relative overflow-hidden "
     >
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       <div className="absolute top-0 -left-40 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse-slow"></div>
@@ -339,7 +339,6 @@ const Hero = () => {
                 </div>
               </div>
             </motion.div>
-
             <motion.div
               variants={staggerItem}
               className="flex flex-wrap gap-4 justify-center pt-2"
@@ -369,11 +368,24 @@ const Hero = () => {
               >
                 View Solutions
               </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  document.getElementById("careers")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                Careers
+              </motion.button>
             </motion.div>
 
             <motion.div
               variants={staggerItem}
-              className="pt-6 border-t border-slate-100"
+              className="pt-6 border-t border-gray-200"
             >
               <div className="flex flex-wrap items-center justify-center gap-6">
                 <div className="text-center">
@@ -399,43 +411,66 @@ const Hero = () => {
   );
 };
 
-// Product Card Component with Attractive Animation
+
+
 const ProductCard = ({ product, index }) => {
   return (
     <motion.div
-      variants={cardHoverVariants}
-      initial="initial"
-      whileHover="hover"
-      className={`group bg-gradient-to-br ${product.gradient} rounded-2xl shadow-lg border border-gray-100 overflow-hidden cursor-pointer`}
+      variants={staggerItem}
+      custom={index}
+      className={`bg-gradient-to-br ${product.gradient} rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 group`}
     >
-      <div className="p-6">
-        <motion.div variants={iconVariants} className="text-5xl mb-3">
-          {product.icon}
-        </motion.div>
-        <h3 className="text-xl font-bold text-gray-800">{product.name}</h3>
-        <p className="text-[#2E8A99] font-semibold text-xs mt-1">
-          {product.tagline}
-        </p>
-        <p className="text-gray-600 mt-2 leading-relaxed text-sm">
-          {product.description}
-        </p>
-        {product.website && product.website !== "#" && (
-          <motion.a
-            href={product.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ x: 5 }}
-            className="inline-block mt-4 text-[#1B4F6E] font-semibold text-sm hover:underline"
-          >
-            Visit Website →
-          </motion.a>
-        )}
+      <div className="flex items-start gap-4">
+        {/* Image instead of icon */}
+        <div className="w-16 h-16 rounded-xl bg-white shadow-md flex items-center justify-center p-2 group-hover:scale-105 transition-transform duration-300">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-contain"
+          />
+         
+        </div>
+
+        <div className="flex-1">
+          <h3 className="text-xl font-bold text-gray-800">{product.name}</h3>
+          <p className="text-sm text-[#2E8A99] font-medium mt-0.5">
+            {product.tagline}
+          </p>
+        </div>
       </div>
+
+      <p className="text-gray-600 text-sm mt-4 leading-relaxed">
+        {product.description}
+      </p>
+
+      <motion.a
+        href={product.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ x: 5 }}
+        className="inline-flex items-center gap-2 mt-4 text-[#2E8A99] font-semibold text-sm hover:text-[#0F2B3D] transition-colors"
+      >
+        Learn More
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </motion.a>
     </motion.div>
   );
 };
 
-// Products Section
+
+
 const Products = () => {
   const { ref, controls } = useScrollReveal();
 
@@ -446,7 +481,7 @@ const Products = () => {
       animate={controls}
       initial="hidden"
       variants={fadeUpVariant}
-      className="bg-gradient-to-br from-gray-50 to-white py-12 px-6"
+      className="py-12 px-6"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-8">
@@ -485,15 +520,25 @@ const UpcomingCard = ({ project, index }) => {
     >
       <div className="p-6">
         <div className="flex justify-between items-start">
-          <motion.div variants={iconVariants} className="text-4xl">{project.icon}</motion.div>
+          <motion.div variants={iconVariants} className="text-4xl">
+            {project.icon}
+          </motion.div>
           <div className="flex flex-col items-end gap-1">
-            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">{project.status}</span>
-            <span className="text-xs text-gray-500">🚀 {project.releaseDate}</span>
+            <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">
+              {project.status}
+            </span>
+            <span className="text-xs text-gray-500">
+              🚀 {project.releaseDate}
+            </span>
           </div>
         </div>
         <h3 className="text-xl font-bold text-gray-800 mt-3">{project.name}</h3>
-        <p className="text-[#2E8A99] font-semibold text-xs mt-1">{project.tagline}</p>
-        <p className="text-gray-600 mt-2 leading-relaxed text-sm">{project.description}</p>
+        <p className="text-[#2E8A99] font-semibold text-xs mt-1">
+          {project.tagline}
+        </p>
+        <p className="text-gray-600 mt-2 leading-relaxed text-sm">
+          {project.description}
+        </p>
         <div className="mt-4 pt-3 border-t border-gray-200">
           <p className="text-xs font-bold text-gray-800 mb-2">Key Features:</p>
           <div className="flex flex-wrap gap-1.5">
@@ -524,15 +569,23 @@ const Upcoming = () => {
       animate={controls}
       initial="hidden"
       variants={fadeUpVariant}
-      className="py-12 px-6 bg-gradient-to-br from-slate-50 to-indigo-50/30"
+      className="py-12 px-6 "
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <span className="text-xs uppercase tracking-wider text-purple-600 font-semibold bg-purple-100 px-3 py-0.5 rounded-full inline-block">coming soon</span>
+          <span className="text-xs uppercase tracking-wider text-purple-600 font-semibold bg-purple-100 px-3 py-0.5 rounded-full inline-block">
+            coming soon
+          </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 text-gray-800">
-            Upcoming <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Innovations</span>
+            Upcoming{" "}
+            <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              Innovations
+            </span>
           </h2>
-          <p className="text-gray-500 mt-2">Exciting new solutions on the horizon to transform your business operations.</p>
+          <p className="text-gray-500 mt-2">
+            Exciting new solutions on the horizon to transform your business
+            operations.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -545,312 +598,46 @@ const Upcoming = () => {
   );
 };
 
-// Services Section - Redesigned
-// const Services = () => {
-//   const { ref, controls } = useScrollReveal();
-
-//   const handleNavigate = () => {
-//     window.open('https://nexvecore.com', '_blank');
-//   };
-
-//   // All services combined with better categorization
-//   const allServices = [
-//     {
-//       category: "Web Applications",
-//       icon: "🌐",
-//       gradient: "from-blue-500 to-cyan-500",
-//       bgGradient: "from-blue-50 to-cyan-50",
-//       items: [
-//         {
-//           name: "SaaS Application",
-//           description: "Cloud-based software solutions with subscription management, multi-tenancy, and scalable infrastructure.",
-//           features: ["User Authentication", "Payment Integration", "Analytics Dashboard", "API Development"],
-//           icon: "☁️"
-//         },
-//         {
-//           name: "E-commerce Store",
-//           description: "Full-featured online stores with product management, cart functionality, and secure checkout.",
-//           features: ["Product Catalog", "Shopping Cart", "Payment Gateway", "Order Management"],
-//           icon: "🛍️"
-//         },
-//         {
-//           name: "POS Application",
-//           description: "Point of Sale systems for retail, restaurants, and businesses with inventory management.",
-//           features: ["Inventory Tracking", "Sales Reports", "Customer Management", "Offline Mode"],
-//           icon: "💳"
-//         }
-//       ]
-//     },
-//     {
-//       category: "Business Websites",
-//       icon: "🏢",
-//       gradient: "from-purple-500 to-pink-500",
-//       bgGradient: "from-purple-50 to-pink-50",
-//       items: [
-//         {
-//           name: "Portfolio Website",
-//           description: "Showcase your work, skills, and achievements with stunning visual layouts.",
-//           features: ["Project Gallery", "Client Testimonials", "Contact Form", "Blog Integration"],
-//           icon: "🎨"
-//         },
-//         {
-//           name: "Professional Business Website",
-//           description: "Corporate websites that establish credibility and drive conversions.",
-//           features: ["Service Pages", "Team Profiles", "Newsletter Signup", "SEO Optimized"],
-//           icon: "💼"
-//         }
-//       ]
-//     }
-//   ];
-
-//   return (
-//     <motion.section
-//       id="services"
-//       ref={ref}
-//       animate={controls}
-//       initial="hidden"
-//       variants={fadeUpVariant}
-//       className="py-16 px-6 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden"
-//     >
-//       {/* Background Decorative Elements */}
-//       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-//       <div className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-r from-blue-400/10 to-cyan-400/10 rounded-full blur-3xl"></div>
-//       <div className="absolute bottom-20 left-10 w-80 h-80 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
-
-//       <div className="max-w-7xl mx-auto relative z-10">
-//         {/* Company Header with Navigation */}
-//         <motion.div 
-//           initial={{ opacity: 0, y: -20 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.5 }}
-//           className="flex justify-between items-center mb-12 pb-4 border-b-2 border-gray-200"
-//         >
-//           <div>
-//             <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] bg-clip-text text-transparent">
-//               Nexve Core
-//             </h1>
-//             <p className="text-xs text-gray-500">Software Development Company</p>
-//           </div>
-//           <motion.button
-//             whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)" }}
-//             whileTap={{ scale: 0.95 }}
-//             onClick={handleNavigate}
-//             className="flex items-center gap-2 bg-gradient-to-r from-[#0F2B3D] to-[#1B4F6E] text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:shadow-xl transition-all duration-300"
-//           >
-//             <span>Visit NexveCore.com</span>
-//             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-//               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-//             </svg>
-//           </motion.button>
-//         </motion.div>
-
-//         {/* Section Header */}
-//         <div className="text-center mb-12">
-//           <motion.div
-//             initial={{ opacity: 0, scale: 0.9 }}
-//             animate={{ opacity: 1, scale: 1 }}
-//             transition={{ duration: 0.5 }}
-//             className="inline-block rounded-full bg-gradient-to-r from-[#E9F4F7] to-[#D4EAF0] px-4 py-1 text-xs font-medium text-[#1B4F6E] shadow-sm"
-//           >
-//             🚀 What We Offer
-//           </motion.div>
-//           <motion.h2 
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5, delay: 0.1 }}
-//             className="text-3xl md:text-5xl font-bold mt-4 text-gray-800"
-//           >
-//             Web & Application{' '}
-//             <span className="bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] bg-clip-text text-transparent">
-//               Development
-//             </span>
-//           </motion.h2>
-//           <motion.p 
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5, delay: 0.2 }}
-//             className="text-gray-500 max-w-2xl mx-auto mt-3 text-lg"
-//           >
-//             Comprehensive development solutions tailored to your business needs
-//           </motion.p>
-//         </div>
-
-//         {/* Services Grid */}
-//         {allServices.map((category, catIdx) => (
-//           <motion.div
-//             key={catIdx}
-//             initial={{ opacity: 0, y: 30 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.6, delay: catIdx * 0.2 }}
-//             className="mb-16"
-//           >
-//             {/* Category Header */}
-//             <div className="flex items-center gap-3 mb-8">
-//               <motion.div
-//                 whileHover={{ scale: 1.1, rotate: 5 }}
-//                 className={`text-3xl w-12 h-12 rounded-xl bg-gradient-to-r ${category.gradient} flex items-center justify-center shadow-lg`}
-//               >
-//                 {category.icon}
-//               </motion.div>
-//               <div>
-//                 <h3 className="text-2xl font-bold text-gray-800">{category.category}</h3>
-//                 <div className={`w-20 h-1 bg-gradient-to-r ${category.gradient} rounded-full mt-1`}></div>
-//               </div>
-//             </div>
-
-//             {/* Service Cards Grid */}
-//             <div className={`grid gap-6 ${
-//               category.items.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'
-//             }`}>
-//               {category.items.map((service, idx) => (
-//                 <motion.div
-//                   key={idx}
-//                   variants={cardHoverVariants}
-//                   initial="initial"
-//                   whileHover="hover"
-//                   className={`group relative bg-gradient-to-br ${category.bgGradient} rounded-2xl shadow-lg border border-gray-100 overflow-hidden cursor-pointer`}
-//                 >
-//                   {/* Animated Border Glow */}
-//                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                  
-//                   <div className="p-6 relative z-10">
-//                     <div className="flex items-start justify-between mb-3">
-//                       <motion.div
-//                         variants={iconVariants}
-//                         className={`text-4xl w-14 h-14 rounded-xl bg-gradient-to-r ${category.gradient} flex items-center justify-center shadow-md`}
-//                       >
-//                         {service.icon}
-//                       </motion.div>
-//                       <motion.div
-//                         whileHover={{ scale: 1.1 }}
-//                         className="text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-//                       >
-//                         ✨
-//                       </motion.div>
-//                     </div>
-                    
-//                     <h4 className="text-lg font-bold text-gray-800 mb-2">{service.name}</h4>
-//                     <p className="text-gray-600 text-sm leading-relaxed mb-4">{service.description}</p>
-                    
-//                     <div className="pt-4 border-t border-gray-200">
-//                       <p className="text-xs font-semibold text-gray-700 mb-2 flex items-center gap-1">
-//                         <span>🔧</span> Key Features
-//                       </p>
-//                       <div className="flex flex-wrap gap-2">
-//                         {service.features.map((feature, fIdx) => (
-//                           <motion.span
-//                             key={fIdx}
-//                             whileHover={{ scale: 1.05, y: -2 }}
-//                             className={`text-xs bg-white/80 text-gray-700 px-2.5 py-1 rounded-full shadow-sm border border-${category.gradient.split(' ')[1]}/20`}
-//                           >
-//                             {feature}
-//                           </motion.span>
-//                         ))}
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </motion.div>
-//               ))}
-//             </div>
-//           </motion.div>
-//         ))}
-
-//         {/* CTA Banner - Enhanced */}
-//         <motion.div
-//           initial={{ opacity: 0, scale: 0.95 }}
-//           animate={{ opacity: 1, scale: 1 }}
-//           transition={{ duration: 0.6, delay: 0.4 }}
-//           className="mt-16 bg-gradient-to-r from-[#0F2B3D] via-[#1B4F6E] to-[#2E8A99] rounded-2xl p-8 md:p-10 text-white relative overflow-hidden shadow-2xl"
-//         >
-//           {/* Animated Background Pattern */}
-//           <div className="absolute inset-0 opacity-10">
-//             <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl animate-pulse"></div>
-//             <div className="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl animate-pulse delay-1000"></div>
-//           </div>
-          
-//           <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
-//             <div className="text-center md:text-left">
-//               <motion.p 
-//                 initial={{ opacity: 0, x: -20 }}
-//                 animate={{ opacity: 1, x: 0 }}
-//                 transition={{ duration: 0.5 }}
-//                 className="text-2xl md:text-3xl font-bold flex items-center gap-2 justify-center md:justify-start"
-//               >
-//                 <span>🚀</span> Ready to build your project?
-//               </motion.p>
-//               <motion.p 
-//                 initial={{ opacity: 0, x: -20 }}
-//                 animate={{ opacity: 1, x: 0 }}
-//                 transition={{ duration: 0.5, delay: 0.1 }}
-//                 className="text-blue-100 text-base mt-2"
-//               >
-//                 Let's discuss your requirements and bring your idea to life.
-//               </motion.p>
-//             </div>
-//             <motion.button 
-//               whileHover={{ scale: 1.05, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.3)" }}
-//               whileTap={{ scale: 0.95 }}
-//               onClick={handleNavigate}
-//               className="bg-white text-[#0F2B3D] px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-gray-100 transition-all duration-300 flex items-center gap-2 group"
-//             >
-//               <span>Start a project</span>
-//               <motion.span
-//                 animate={{ x: [0, 5, 0] }}
-//                 transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-//               >
-//                 →
-//               </motion.span>
-//             </motion.button>
-//           </div>
-//         </motion.div>
-
-//         {/* Statistics Section */}
-//         <motion.div
-//           initial={{ opacity: 0, y: 30 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.6, delay: 0.5 }}
-//           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
-//         >
-//           {[
-//             { number: "150+", label: "Projects Delivered", icon: "✅" },
-//             { number: "50+", label: "Happy Clients", icon: "😊" },
-//             { number: "24/7", label: "Support Available", icon: "🔄" },
-//             { number: "99%", label: "Client Satisfaction", icon: "⭐" }
-//           ].map((stat, idx) => (
-//             <motion.div
-//               key={idx}
-//               whileHover={{ scale: 1.05, y: -5 }}
-//               className="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
-//             >
-//               <div className="text-2xl mb-1">{stat.icon}</div>
-//               <div className="text-2xl font-bold text-gray-800">{stat.number}</div>
-//               <div className="text-xs text-gray-500">{stat.label}</div>
-//             </motion.div>
-//           ))}
-//         </motion.div>
-//       </div>
-//     </motion.section>
-//   );
-// };
-
-
-
 
 // Services Section - Simplified
 const Services = () => {
   const { ref, controls } = useScrollReveal();
 
   const handleNavigate = () => {
-    window.open('https://nexvecore.com', '_blank');
+    window.open("https://nexvecore.com", "_blank");
   };
 
   const services = [
-    { name: "Web Applications", icon: "🌐", gradient: "from-blue-500 to-cyan-500" },
-    { name: "E-commerce Store", icon: "🛍️", gradient: "from-emerald-500 to-teal-500" },
-    { name: "POS Application", icon: "💳", gradient: "from-purple-500 to-pink-500" },
-    { name: "Portfolio Website", icon: "🎨", gradient: "from-orange-500 to-red-500" },
-    { name: "Business Website", icon: "🏢", gradient: "from-indigo-500 to-blue-500" },
-    { name: "SaaS Platform", icon: "☁️", gradient: "from-cyan-500 to-blue-500" },
+    {
+      name: "Web Applications",
+      icon: "🌐",
+      gradient: "from-blue-500 to-cyan-500",
+    },
+    {
+      name: "E-commerce Store",
+      icon: "🛍️",
+      gradient: "from-emerald-500 to-teal-500",
+    },
+    {
+      name: "POS Application",
+      icon: "💳",
+      gradient: "from-purple-500 to-pink-500",
+    },
+    {
+      name: "Portfolio Website",
+      icon: "🎨",
+      gradient: "from-orange-500 to-red-500",
+    },
+    {
+      name: "Business Website",
+      icon: "🏢",
+      gradient: "from-indigo-500 to-blue-500",
+    },
+    {
+      name: "SaaS Platform",
+      icon: "☁️",
+      gradient: "from-cyan-500 to-blue-500",
+    },
   ];
 
   return (
@@ -860,7 +647,7 @@ const Services = () => {
       animate={controls}
       initial="hidden"
       variants={fadeUpVariant}
-      className="py-16 px-6 bg-gradient-to-br from-gray-50 to-white"
+      className="py-16 px-6 "
     >
       <div className="max-w-7xl mx-auto">
         {/* Company Header */}
@@ -869,7 +656,9 @@ const Services = () => {
             <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] bg-clip-text text-transparent">
               Nexve Core
             </h1>
-            <p className="text-xs text-gray-500">Software Development Company</p>
+            <p className="text-xs text-gray-500">
+              Software Development Company
+            </p>
           </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -878,8 +667,18 @@ const Services = () => {
             className="flex items-center gap-2 bg-gradient-to-r from-[#0F2B3D] to-[#1B4F6E] text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all"
           >
             <span>Visit NexveCore.com</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
             </svg>
           </motion.button>
         </div>
@@ -890,7 +689,7 @@ const Services = () => {
             Our Expertise
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 text-gray-800">
-            Web & Application{' '}
+            Web & Application{" "}
             <span className="bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] bg-clip-text text-transparent">
               Development
             </span>
@@ -933,7 +732,9 @@ const Services = () => {
           className="bg-gradient-to-r from-[#0F2B3D] to-[#1B4F6E] rounded-2xl p-6 md:p-8 text-white flex flex-col md:flex-row justify-between items-center gap-4 shadow-xl"
         >
           <div className="text-center md:text-left">
-            <p className="text-xl md:text-2xl font-bold">Ready to build your project?</p>
+            <p className="text-xl md:text-2xl font-bold">
+              Ready to build your project?
+            </p>
             <p className="text-blue-100 text-sm mt-1">
               Visit NexveCore.com for detailed service information and pricing.
             </p>
@@ -1005,7 +806,7 @@ const Team = () => {
       animate={controls}
       initial="hidden"
       variants={fadeUpVariant}
-      className="py-12 px-6 bg-gradient-to-br from-gray-50 to-white"
+      className="py-12 px-6"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
@@ -1042,8 +843,12 @@ const Team = () => {
                   {member.icon}
                 </motion.div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800">{member.name}</h3>
-                  <p className="text-[#2E8A99] text-xs font-semibold mt-1">{member.role}</p>
+                  <h3 className="text-lg font-bold text-gray-800">
+                    {member.name}
+                  </h3>
+                  <p className="text-[#2E8A99] text-xs font-semibold mt-1">
+                    {member.role}
+                  </p>
                 </div>
               </div>
               <p className="text-gray-500 text-xs mt-3 leading-relaxed text-center">
@@ -1076,50 +881,328 @@ const Team = () => {
   );
 };
 
+
+// Career Section
+// Career Section
+const Career = () => {
+  const { ref, controls } = useScrollReveal();
+
+  const openPositions = [
+    {
+      title: "Sales Manager",
+      type: "Full-time",
+      location: "Kerala, India",
+      experience: "2+ years (Mandatory)",
+      icon: "👔",
+      gradient: "from-blue-500 to-cyan-500",
+      description: "Experienced Sales Manager to lead our sales team, develop strategies, drive revenue growth, and build strong client relationships in the enterprise software sector.",
+      requirements: [
+        "Minimum 2+ years of sales experience in IT/Software industry",
+        "Proven track record of meeting/exceeding sales targets",
+        "Experience leading and mentoring sales teams",
+        "Strong network in enterprise client base",
+        "Excellent communication and negotiation skills",
+      ],
+    },
+    {
+      title: "Sales Executive",
+      type: "Full-time",
+      location: "Kerala, India",
+      experience: "0-2 years",
+      icon: "📞",
+      gradient: "from-emerald-500 to-teal-500",
+      description: "Dynamic Sales Executive to identify new business opportunities, generate leads, and close deals for our software products including ERP, POS, and custom development services.",
+      requirements: [
+        "0-2 years of sales experience (Freshers with strong communication skills can apply)",
+        "Goal-oriented with strong negotiation skills",
+        "Excellent verbal and written communication",
+        "Ability to work in a fast-paced environment",
+        "Basic knowledge of software/IT products is a plus",
+      ],
+    },
+  ];
+
+  const benefits = [
+    // { icon: "💼", title: "Competitive Salary", description: "Market-leading compensation + incentives" },
+    { icon: "📈", title: "Sales Commission", description: "Attractive commission structure" },
+    // { icon: "🏥", title: "Health Insurance", description: "Comprehensive medical coverage" },
+    { icon: "🏡", title: "Flexible Work", description: "Hybrid work model available" },
+    { icon: "🚀", title: "Growth Path", description: "Clear career progression to senior roles" },
+    { icon: "🎉", title: "Team Events", description: "Regular team building & rewards" },
+  ];
+
+  // Function to handle application form download
+  const downloadApplicationForm = () => {
+    // Create a link to the application form file
+    // You can replace this with your actual file path
+    const formUrl = "/application-form.pdf"; // Change this to your actual file path
+    const link = document.createElement("a");
+    link.href = formUrl;
+    link.download = "Nexus_Ventures_Application_Form.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <motion.section
+      id="careers"
+      ref={ref}
+      animate={controls}
+      initial="hidden"
+      variants={fadeUpVariant}
+      className="py-12 px-6 bg-gradient-to-b from-white to-gray-50"
+    >
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="text-xs uppercase tracking-wider text-[#2E8A99] font-semibold bg-[#E9F4F7] px-3 py-0.5 rounded-full inline-block">
+            join our team
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-gray-800">
+            Build your career with{" "}
+            <span className="bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] bg-clip-text text-transparent">
+              Nexus Ventures
+            </span>
+          </h2>
+          <p className="text-gray-500 mt-2">
+            Be part of our growing sales team and shape the future of enterprise technology.
+          </p>
+        </div>
+
+        {/* Benefits Section */}
+        <div className="mb-12">
+          <h3 className="text-xl font-bold text-center text-gray-800 mb-6">
+            Why join us? <span className="text-[#2E8A99]">✨</span>
+          </h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {benefits.map((benefit, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                whileHover={{ scale: 1.02 }}
+                className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all border border-gray-100"
+              >
+                <div className="text-2xl">{benefit.icon}</div>
+                <div>
+                  <p className="font-semibold text-gray-800 text-sm">{benefit.title}</p>
+                  <p className="text-xs text-gray-500">{benefit.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Open Positions */}
+        <div>
+          <h3 className="text-xl font-bold text-center text-gray-800 mb-6">
+            Open Positions <span className="text-[#2E8A99]">({openPositions.length})</span>
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            {openPositions.map((position, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${position.gradient} flex items-center justify-center text-2xl shadow-md`}>
+                    {position.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-bold text-gray-800">{position.title}</h4>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                        {position.type}
+                      </span>
+                      <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
+                        📍 {position.location}
+                      </span>
+                      <span className={`text-xs rounded-full px-2 py-0.5 ${
+                        position.experience.includes("Mandatory") 
+                          ? "bg-red-100 text-red-700 font-semibold" 
+                          : "bg-purple-100 text-purple-700"
+                      }`}>
+                        🎓 {position.experience}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm mt-3 leading-relaxed">
+                      {position.description}
+                    </p>
+                    
+                    {/* Requirements List */}
+                    <div className="mt-4 pt-3 border-t border-gray-100">
+                      <p className="text-xs font-bold text-gray-800 mb-2">Key Requirements:</p>
+                      <ul className="space-y-1">
+                        {position.requirements.map((req, reqIdx) => (
+                          <li key={reqIdx} className="text-xs text-gray-600 flex items-start gap-2">
+                            <span className="text-[#2E8A99] mt-0.5">•</span>
+                            <span>{req}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={downloadApplicationForm}
+                      className="mt-5 bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition-all inline-flex items-center gap-2"
+                    >
+                      📥 Download Application Form
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Contact CTA - Updated with Application Form Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-6 text-center bg-gradient-to-r from-gray-100 to-gray-50 rounded-2xl p-6 border border-gray-200"
+        >
+          <p className="text-gray-600 text-sm">
+            📄 Download and fill the application form, then send to{" "}
+            <a href="mailto:careers@nexusventures.com" className="text-[#2E8A99] font-semibold hover:underline">
+              careers@nexusventures.com
+            </a>
+          </p>
+          <div className="mt-3">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={downloadApplicationForm}
+              className="inline-flex items-center gap-2 bg-white border-2 border-[#2E8A99] text-[#2E8A99] px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-[#2E8A99] hover:text-white transition-all duration-300"
+            >
+              📥 Download Application Form
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </motion.button>
+          </div>
+          <p className="text-gray-400 text-xs mt-3">
+            Please send the completed application form along with your resume
+          </p>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
+
 // Footer Component
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const productLinks = {
+    PocketStor: "https://poketstor.com/",
+    "Phasil.com": "https://pasil.in/",
+    "Nexve ERP": "#",
+    "Nexve POS": "#",
+  };
+
   return (
     <footer className="bg-gray-900 text-gray-300 py-8 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-6">
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-[#2E8A99] to-[#1B4F6E] flex items-center justify-center font-bold text-white shadow-md">N</div>
-            <span className="text-white text-lg font-bold">Nexve LLC</span>
-          </div>
-          <p className="text-xs text-gray-400 leading-relaxed">Parent company of PocketStor & Phasil.com. Digital innovation at scale.</p>
-        </div>
+       <div className="flex items-center gap-2 mb-3">
+  <img 
+    src="/logo.jpeg" 
+    alt="NEXUS VENTURES Logo" 
+    className="w-8 h-8 rounded-lg object-cover shadow-md"
+  />
+  <span className="text-white text-lg font-bold">NEXUS VENTURES</span>
+</div>
+        
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Explore</h4>
           <ul className="space-y-1.5 text-xs text-gray-400">
-            <li className="hover:text-white cursor-pointer transition">Products</li>
-            <li className="hover:text-white cursor-pointer transition">Services</li>
-            <li className="hover:text-white cursor-pointer transition">Team</li>
-            <li className="hover:text-white cursor-pointer transition">Careers</li>
+            <li 
+              onClick={() => scrollToSection("products")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              Products
+            </li>
+            <li 
+              onClick={() => scrollToSection("services")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              Services
+            </li>
+            <li 
+              onClick={() => scrollToSection("team")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              Team
+            </li>
+            <li 
+              onClick={() => scrollToSection("careers")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              Careers
+            </li>
           </ul>
         </div>
+        
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Products</h4>
           <ul className="space-y-1.5 text-xs text-gray-400">
-            <li className="hover:text-white cursor-pointer transition">PocketStor</li>
-            <li className="hover:text-white cursor-pointer transition">Phasil.com</li>
-            <li className="hover:text-white cursor-pointer transition">Nexve ERP</li>
-            <li className="hover:text-white cursor-pointer transition">Nexve POS</li>
+            <li 
+              onClick={() => window.open(productLinks.PocketStor, "_blank")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              PocketStor
+            </li>
+            <li 
+              onClick={() => window.open(productLinks["Phasil.com"], "_blank")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              Phasil.com
+            </li>
+            <li 
+              onClick={() => scrollToSection("products")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              Nexve ERP
+            </li>
+            <li 
+              onClick={() => scrollToSection("products")}
+              className="hover:text-white cursor-pointer transition"
+            >
+              Nexve POS
+            </li>
           </ul>
         </div>
+        
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Connect</h4>
           <ul className="space-y-1.5 text-xs text-gray-400">
-            <li>📧 hello@nexve.com</li>
-            <li>📞 +1 (555) 789-2341</li>
-            <li>📍 Delaware, USA</li>
-            <li className="text-xs mt-2">© {currentYear} Nexve LLC</li>
+            <li>NEXUS VENTURES LLC, 2nd Floor,</li>
+            <li>Flat No.: 235, Binnamangala, Indiranagar,</li>
+            <li>Bengaluru, 560038</li>
+            <li className="text-xs mt-2">© {currentYear} NEXUS VENTURES LLC | All Rights Reserved</li>
           </ul>
         </div>
       </div>
+      
       <div className="border-t border-gray-800 mt-6 pt-5 text-center text-gray-500 text-xs">
-        Innovation meets reliability — website & app development for modern enterprises.
+        © {currentYear} NEXUS VENTURES LLC | All Rights Reserved
       </div>
     </footer>
   );
@@ -1145,7 +1228,7 @@ document.head.appendChild(style);
 // Main App Component
 const App = () => {
   return (
-    <div className="bg-white overflow-x-hidden">
+    <div className="bg-gradient-to-br from-gray-300 via-gray-100 to-blue-50/30 overflow-x-hidden">
       <Navbar />
       <main>
         <Hero />
@@ -1153,6 +1236,8 @@ const App = () => {
         <Upcoming />
         <Services />
         <Team />
+                <Career />  {/* Add this line */}
+
       </main>
       <Footer />
     </div>
