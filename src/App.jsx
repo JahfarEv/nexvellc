@@ -411,8 +411,6 @@ const Hero = () => {
   );
 };
 
-
-
 const ProductCard = ({ product, index }) => {
   return (
     <motion.div
@@ -428,7 +426,6 @@ const ProductCard = ({ product, index }) => {
             alt={product.name}
             className="w-full h-full object-contain"
           />
-         
         </div>
 
         <div className="flex-1">
@@ -468,8 +465,6 @@ const ProductCard = ({ product, index }) => {
     </motion.div>
   );
 };
-
-
 
 const Products = () => {
   const { ref, controls } = useScrollReveal();
@@ -597,7 +592,6 @@ const Upcoming = () => {
     </motion.section>
   );
 };
-
 
 // Services Section - Simplified
 const Services = () => {
@@ -872,48 +866,45 @@ const Team = () => {
           ))}
         </div>
 
-        <div className="mt-8 text-center text-gray-400 text-xs flex items-center justify-center gap-2">
+        {/* <div className="mt-8 text-center text-gray-400 text-xs flex items-center justify-center gap-2">
           <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
           ✨ +15 dedicated engineers, designers & strategists globally
-        </div>
+        </div> */}
       </div>
     </motion.section>
   );
 };
 
-
-// Career Section
 // Career Section
 const Career = () => {
   const { ref, controls } = useScrollReveal();
 
   const openPositions = [
     {
-      title: "Sales Manager",
+      title: "Marketing Manager",
       type: "Full-time",
       location: "Kerala, India",
-      experience: "2+ years (Mandatory)",
       icon: "👔",
       gradient: "from-blue-500 to-cyan-500",
-      description: "Experienced Sales Manager to lead our sales team, develop strategies, drive revenue growth, and build strong client relationships in the enterprise software sector.",
+      description:
+        "Experienced Marketing Manager to lead our marketing team, develop strategies, drive brand growth, and build strong client relationships in the enterprise software sector.",
       requirements: [
-        "Minimum 2+ years of sales experience in IT/Software industry",
-        "Proven track record of meeting/exceeding sales targets",
-        "Experience leading and mentoring sales teams",
+        "Minimum 2+ years of marketing experience in IT/Software industry",
+        "Proven track record of meeting/exceeding marketing targets",
+        "Experience leading and mentoring marketing teams",
         "Strong network in enterprise client base",
         "Excellent communication and negotiation skills",
       ],
     },
     {
-      title: "Sales Executive",
+      title: "Marketing Executive",
       type: "Full-time",
       location: "Kerala, India",
-      experience: "0-2 years",
       icon: "📞",
       gradient: "from-emerald-500 to-teal-500",
-      description: "Dynamic Sales Executive to identify new business opportunities, generate leads, and close deals for our software products including ERP, POS, and custom development services.",
+      description:
+        "Dynamic Marketing Executive to identify new business opportunities, generate leads, and promote our software products including ERP, POS, and custom development services.",
       requirements: [
-        "0-2 years of sales experience (Freshers with strong communication skills can apply)",
         "Goal-oriented with strong negotiation skills",
         "Excellent verbal and written communication",
         "Ability to work in a fast-paced environment",
@@ -923,19 +914,62 @@ const Career = () => {
   ];
 
   const benefits = [
-    // { icon: "💼", title: "Competitive Salary", description: "Market-leading compensation + incentives" },
-    { icon: "📈", title: "Sales Commission", description: "Attractive commission structure" },
-    // { icon: "🏥", title: "Health Insurance", description: "Comprehensive medical coverage" },
-    { icon: "🏡", title: "Flexible Work", description: "Hybrid work model available" },
-    { icon: "🚀", title: "Growth Path", description: "Clear career progression to senior roles" },
-    { icon: "🎉", title: "Team Events", description: "Regular team building & rewards" },
+    {
+      icon: "📈",
+      title: "Sales Commission",
+      description: "Attractive commission structure",
+    },
+    {
+      icon: "🏡",
+      title: "Flexible Work",
+      description: "Hybrid work model available",
+    },
+    {
+      icon: "🚀",
+      title: "Growth Path",
+      description: "Clear career progression to senior roles",
+    },
+    {
+      icon: "🎉",
+      title: "Team Events",
+      description: "Regular team building & rewards",
+    },
+  ];
+
+  const recruitmentProcess = [
+    {
+      step: "1",
+      title: "Submit Application",
+      description: "Download and fill the application form with your details",
+      icon: "📄",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      step: "2",
+      title: "Application Review",
+      description: "Our HR team will review your application within 3-5 business days",
+      icon: "🔍",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      step: "3",
+      title: "Interview Schedule",
+      description: "Shortlisted candidates will be contacted for interview",
+      icon: "📅",
+      color: "from-emerald-500 to-teal-500",
+    },
+    {
+      step: "4",
+      title: "Training Program",
+      description: "Selected candidates undergo comprehensive training",
+      icon: "🎓",
+      color: "from-orange-500 to-red-500",
+    },
   ];
 
   // Function to handle application form download
   const downloadApplicationForm = () => {
-    // Create a link to the application form file
-    // You can replace this with your actual file path
-    const formUrl = "/application-form.pdf"; // Change this to your actual file path
+    const formUrl = "/application-form.pdf";
     const link = document.createElement("a");
     link.href = formUrl;
     link.download = "Nexus_Ventures_Application_Form.pdf";
@@ -951,30 +985,33 @@ const Career = () => {
       animate={controls}
       initial="hidden"
       variants={fadeUpVariant}
-      className="py-12 px-6 bg-gradient-to-b from-white to-gray-50"
+      className="py-16 px-6 "
     >
       <div className="max-w-7xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-xs uppercase tracking-wider text-[#2E8A99] font-semibold bg-[#E9F4F7] px-3 py-0.5 rounded-full inline-block">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="text-xs uppercase tracking-wider text-[#2E8A99] font-semibold bg-[#E9F4F7] px-4 py-1 rounded-full inline-block">
             join our team
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-gray-800">
+          <h2 className="text-3xl md:text-4xl font-bold mt-4 text-gray-800">
             Build your career with{" "}
             <span className="bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] bg-clip-text text-transparent">
               Nexus Ventures
             </span>
           </h2>
-          <p className="text-gray-500 mt-2">
-            Be part of our growing sales team and shape the future of enterprise technology.
+          <p className="text-gray-500 text-base mt-3">
+            Be part of our growing marketing team and shape the future of enterprise
+            technology.
           </p>
         </div>
 
+        {/* Recruitment Process Section */}
+       
         {/* Benefits Section */}
-        <div className="mb-12">
-          <h3 className="text-xl font-bold text-center text-gray-800 mb-6">
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">
             Why join us? <span className="text-[#2E8A99]">✨</span>
           </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {benefits.map((benefit, idx) => (
               <motion.div
                 key={idx}
@@ -982,12 +1019,14 @@ const Career = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                className="bg-white rounded-xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-all border border-gray-100"
+                className="bg-white rounded-xl p-5 flex items-center gap-4 shadow-sm hover:shadow-md transition-all border border-gray-100"
               >
-                <div className="text-2xl">{benefit.icon}</div>
+                <div className="text-3xl">{benefit.icon}</div>
                 <div>
-                  <p className="font-semibold text-gray-800 text-sm">{benefit.title}</p>
-                  <p className="text-xs text-gray-500">{benefit.description}</p>
+                  <p className="font-semibold text-gray-800 text-base">
+                    {benefit.title}
+                  </p>
+                  <p className="text-sm text-gray-500">{benefit.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -995,11 +1034,12 @@ const Career = () => {
         </div>
 
         {/* Open Positions */}
-        <div>
-          <h3 className="text-xl font-bold text-center text-gray-800 mb-6">
-            Open Positions <span className="text-[#2E8A99]">({openPositions.length})</span>
+        <div className="mb-12">
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">
+            Open Positions{" "}
+            <span className="text-[#2E8A99]">({openPositions.length})</span>
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-8">
             {openPositions.map((position, idx) => (
               <motion.div
                 key={idx}
@@ -1007,99 +1047,128 @@ const Career = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
+                className="bg-white rounded-2xl p-7 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300"
               >
-                <div className="flex items-start gap-4">
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${position.gradient} flex items-center justify-center text-2xl shadow-md`}>
+                <div className="flex items-start gap-5">
+                  <div
+                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${position.gradient} flex items-center justify-center text-3xl shadow-md`}
+                  >
                     {position.icon}
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-xl font-bold text-gray-800">{position.title}</h4>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                        {position.type}
-                      </span>
-                      <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
-                        📍 {position.location}
-                      </span>
-                      <span className={`text-xs rounded-full px-2 py-0.5 ${
-                        position.experience.includes("Mandatory") 
-                          ? "bg-red-100 text-red-700 font-semibold" 
-                          : "bg-purple-100 text-purple-700"
-                      }`}>
-                        🎓 {position.experience}
-                      </span>
-                    </div>
-                    <p className="text-gray-600 text-sm mt-3 leading-relaxed">
+                    <h4 className="text-2xl font-bold text-gray-800">
+                      {position.title}
+                    </h4>
+
+                    <p className="text-gray-600 text-base mt-3 leading-relaxed">
                       {position.description}
                     </p>
-                    
+
                     {/* Requirements List */}
-                    <div className="mt-4 pt-3 border-t border-gray-100">
-                      <p className="text-xs font-bold text-gray-800 mb-2">Key Requirements:</p>
-                      <ul className="space-y-1">
+                    <div className="mt-5 pt-4 border-t border-gray-100">
+                      <p className="text-sm font-bold text-gray-800 mb-3">
+                        Key Requirements:
+                      </p>
+                      <ul className="space-y-2">
                         {position.requirements.map((req, reqIdx) => (
-                          <li key={reqIdx} className="text-xs text-gray-600 flex items-start gap-2">
+                          <li
+                            key={reqIdx}
+                            className="text-sm text-gray-600 flex items-start gap-2"
+                          >
                             <span className="text-[#2E8A99] mt-0.5">•</span>
                             <span>{req}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={downloadApplicationForm}
-                      className="mt-5 bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition-all inline-flex items-center gap-2"
-                    >
-                      📥 Download Application Form
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                      </svg>
-                    </motion.button>
                   </div>
+                </div>
+              </motion.div>
+              
+            ))}
+          </div>
+          
+        </div>
+
+       
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center bg-gradient-to-r from-gray-100 to-gray-50 rounded-2xl p-8 border border-gray-200"
+        >
+          <p className="text-gray-700 text-base mb-3">
+            📄 Download and fill the application form, then send to{" "}
+            <a
+              href="mailto:careers@nexusventures.com"
+              className="text-[#2E8A99] font-semibold hover:underline"
+            >
+              careers@poketstor.com
+            </a>
+          </p>
+          <div className="mt-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={downloadApplicationForm}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0F2B3D] to-[#2E8A99] text-white px-6 py-3 rounded-xl text-base font-semibold hover:shadow-xl transition-all duration-300"
+            >
+              📥 Download Application Form
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+            </motion.button>
+          </div>
+         
+        </motion.div>
+
+         <div className="my-16">
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">
+            Recruitment Process{" "}
+            <span className="text-[#2E8A99]">✨</span>
+          </h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {recruitmentProcess.map((process, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="relative bg-white rounded-xl p-5 text-center shadow-md hover:shadow-xl transition-all border border-gray-100"
+              >
+                <div className={`absolute -top-3 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r ${process.color} flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
+                  {process.step}
+                </div>
+                <div className="mt-4">
+                  <div className="text-4xl mb-3">{process.icon}</div>
+                  <h4 className="text-lg font-bold text-gray-800 mb-2">
+                    {process.title}
+                  </h4>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    {process.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Contact CTA - Updated with Application Form Link */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-6 text-center bg-gradient-to-r from-gray-100 to-gray-50 rounded-2xl p-6 border border-gray-200"
-        >
-          <p className="text-gray-600 text-sm">
-            📄 Download and fill the application form, then send to{" "}
-            <a href="mailto:careers@nexusventures.com" className="text-[#2E8A99] font-semibold hover:underline">
-              careers@nexusventures.com
-            </a>
-          </p>
-          <div className="mt-3">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={downloadApplicationForm}
-              className="inline-flex items-center gap-2 bg-white border-2 border-[#2E8A99] text-[#2E8A99] px-4 py-1.5 rounded-lg text-sm font-semibold hover:bg-[#2E8A99] hover:text-white transition-all duration-300"
-            >
-              📥 Download Application Form
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-            </motion.button>
-          </div>
-          <p className="text-gray-400 text-xs mt-3">
-            Please send the completed application form along with your resume
-          </p>
-        </motion.div>
       </div>
     </motion.section>
   );
 };
-
 // Footer Component
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -1121,37 +1190,37 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-8 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-6">
-       <div className="flex items-center gap-2 mb-3">
-  <img 
-    src="/logo.jpeg" 
-    alt="NEXUS VENTURES Logo" 
-    className="w-8 h-8 rounded-lg object-cover shadow-md"
-  />
-  <span className="text-white text-lg font-bold">NEXUS VENTURES</span>
-</div>
-        
+        <div className="flex items-center gap-2 mb-3">
+          <img
+            src="/logo.jpeg"
+            alt="NEXUS VENTURES Logo"
+            className="w-8 h-8 rounded-lg object-cover shadow-md"
+          />
+          <span className="text-white text-lg font-bold">NEXUS VENTURES</span>
+        </div>
+
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Explore</h4>
           <ul className="space-y-1.5 text-xs text-gray-400">
-            <li 
+            <li
               onClick={() => scrollToSection("products")}
               className="hover:text-white cursor-pointer transition"
             >
               Products
             </li>
-            <li 
+            <li
               onClick={() => scrollToSection("services")}
               className="hover:text-white cursor-pointer transition"
             >
               Services
             </li>
-            <li 
+            <li
               onClick={() => scrollToSection("team")}
               className="hover:text-white cursor-pointer transition"
             >
               Team
             </li>
-            <li 
+            <li
               onClick={() => scrollToSection("careers")}
               className="hover:text-white cursor-pointer transition"
             >
@@ -1159,29 +1228,29 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        
+
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Products</h4>
           <ul className="space-y-1.5 text-xs text-gray-400">
-            <li 
+            <li
               onClick={() => window.open(productLinks.PocketStor, "_blank")}
               className="hover:text-white cursor-pointer transition"
             >
               PocketStor
             </li>
-            <li 
+            <li
               onClick={() => window.open(productLinks["Phasil.com"], "_blank")}
               className="hover:text-white cursor-pointer transition"
             >
               Phasil.com
             </li>
-            <li 
+            <li
               onClick={() => scrollToSection("products")}
               className="hover:text-white cursor-pointer transition"
             >
               Nexve ERP
             </li>
-            <li 
+            <li
               onClick={() => scrollToSection("products")}
               className="hover:text-white cursor-pointer transition"
             >
@@ -1189,18 +1258,20 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        
+
         <div>
           <h4 className="text-white font-semibold mb-3 text-sm">Connect</h4>
           <ul className="space-y-1.5 text-xs text-gray-400">
             <li>NEXUS VENTURES LLC, 2nd Floor,</li>
             <li>Flat No.: 235, Binnamangala, Indiranagar,</li>
             <li>Bengaluru, 560038</li>
-            <li className="text-xs mt-2">© {currentYear} NEXUS VENTURES LLC | All Rights Reserved</li>
+            <li className="text-xs mt-2">
+              © {currentYear} NEXUS VENTURES LLC | All Rights Reserved
+            </li>
           </ul>
         </div>
       </div>
-      
+
       <div className="border-t border-gray-800 mt-6 pt-5 text-center text-gray-500 text-xs">
         © {currentYear} NEXUS VENTURES LLC | All Rights Reserved
       </div>
@@ -1236,8 +1307,7 @@ const App = () => {
         <Upcoming />
         <Services />
         <Team />
-                <Career />  {/* Add this line */}
-
+        <Career /> {/* Add this line */}
       </main>
       <Footer />
     </div>
