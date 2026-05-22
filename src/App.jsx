@@ -162,7 +162,7 @@ const Navbar = () => {
           </motion.div>
           <div>
             <span className="text-2xl font-bold tracking-tight text-gray-800">
-              NEXUS <span className="text-[#2E8A99]">VENTURES</span>
+              NEXUS <span className="text-[#2E8A99]">VENTURES LLC</span>
             </span>
           </div>
         </div>
@@ -1104,7 +1104,7 @@ const Career = () => {
               href="mailto:careers@nexusventures.com"
               className="text-[#2E8A99] font-semibold hover:underline"
             >
-              careers@poketstor.com
+              career@poketstor.com
             </a>
           </p>
           <div className="mt-4">
