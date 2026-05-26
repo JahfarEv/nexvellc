@@ -128,122 +128,161 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    setMobileMenuOpen(false);
-  };
+  // const scrollTo = (id) => {
+  //   const el = document.getElementById(id);
+  //   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   setMobileMenuOpen(false);
+  // };
+
+const scrollTo = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    // Get the element's position relative to the viewport
+    const elementPosition = element.getBoundingClientRect().top;
+    const navbarHeight = 80; // Approximate navbar height in pixels
+    
+    // Current scroll position
+    const currentScroll = window.pageYOffset;
+    
+    // Calculate the target position (accounting for navbar)
+    const targetPosition = currentScroll + elementPosition - navbarHeight;
+    
+    // Smooth scroll to target
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth"
+    });
+    
+    // For iOS Safari compatibility, also try this alternative
+    setTimeout(() => {
+      const newPosition = window.pageYOffset;
+      if (Math.abs(newPosition - targetPosition) > 10) {
+        window.scrollTo(0, targetPosition);
+      }
+    }, 100);
+  }
+  setMobileMenuOpen(false);
+};
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-2xl border-b border-gray-100"
-          : "bg-white/80 backdrop-blur-md border-b border-gray-100/50"
-      } py-3 px-6 md:px-12`}
+  initial={{ y: -100 }}
+  animate={{ y: 0 }}
+  transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+  className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+    isScrolled
+      ? "bg-white/95 backdrop-blur-xl shadow-2xl border-b border-gray-100"
+      : "bg-white/80 backdrop-blur-md border-b border-gray-100/50"
+  } py-3 px-6 md:px-12`}
+>
+  <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <div
+      className="flex items-center gap-2 cursor-pointer group"
+      onClick={() => scrollTo("home")}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div
-          className="flex items-center gap-2 cursor-pointer group"
-          onClick={() => scrollTo("home")}
-        >
-          <motion.div
-            whileHover={{ rotate: 5, scale: 1.05 }}
-            className="w-16 h-16 rounded-xl"
-          >
-            <img
-              src="/logo.jpeg"
-              alt="Nexve Logo"
-              className="w-full h-full rounded-xl"
-            />
-          </motion.div>
-          <div>
-            <span className="text-2xl font-bold tracking-tight text-gray-800">
-              NEXUS <span className="text-[#2E8A99]">VENTURES LLC</span>
-            </span>
-          </div>
-        </div>
-
-        <div className="hidden md:flex gap-8 text-gray-600 font-medium">
-          {["Home", "Products", "Upcoming", "Services", "Team"].map((item) => (
-            <button
-              key={item}
-              onClick={() => scrollTo(item.toLowerCase())}
-              className="relative group hover:text-[#1B6B7A] transition-all duration-300 text-sm font-semibold"
-            >
-              {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#1B4F6E] to-[#2E8A99] transition-all duration-300 group-hover:w-full"></span>
-            </button>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-4">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block bg-gradient-to-r from-[#1B4F6E] to-[#2E8A99] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:shadow-xl transition-all"
-          >
-            Contact Us
-          </motion.button>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-gray-100 text-gray-600"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {mobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
       <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{
-          height: mobileMenuOpen ? "auto" : 0,
-          opacity: mobileMenuOpen ? 1 : 0,
-        }}
-        transition={{ duration: 0.3 }}
-        className="md:hidden overflow-hidden bg-white border-b border-gray-100"
+        whileHover={{ rotate: 5, scale: 1.05 }}
+        className="w-16 h-16 rounded-xl"
       >
-        <div className="flex flex-col p-4 gap-2">
-          {["Home", "Products", "Upcoming", "Services", "Team"].map((item) => (
-            <button
-              key={item}
-              onClick={() => scrollTo(item.toLowerCase())}
-              className="text-gray-600 py-2 text-left font-medium hover:text-[#1B6B7A] transition-colors"
-            >
-              {item}
-            </button>
-          ))}
-          <button className="bg-gradient-to-r from-[#1B4F6E] to-[#2E8A99] text-white px-5 py-2 rounded-full text-sm font-semibold w-full mt-2">
-            Contact Us
-          </button>
-        </div>
+        <img
+          src="/logo.jpeg"
+          alt="Nexve Logo"
+          className="w-full h-full rounded-xl"
+        />
       </motion.div>
-    </motion.nav>
+      <div>
+        <span className="text-xl md:text-2xl font-bold tracking-tight text-gray-800">
+          NEXUS <span className="text-[#2E8A99]">VENTURES LLC</span>
+        </span>
+      </div>
+    </div>
+
+    <div className="hidden md:flex gap-8 text-gray-600 font-medium">
+      {["Home", "Products", "Upcoming", "Services", "Team"].map((item) => (
+        <button
+          key={item}
+          onClick={() => scrollTo(item.toLowerCase())}
+          className="relative group hover:text-[#1B6B7A] transition-all duration-300 text-sm font-semibold"
+        >
+          {item}
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#1B4F6E] to-[#2E8A99] transition-all duration-300 group-hover:w-full"></span>
+        </button>
+      ))}
+    </div>
+
+    <div className="flex items-center gap-4">
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="hidden md:block bg-gradient-to-r from-[#1B4F6E] to-[#2E8A99] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:shadow-xl transition-all"
+      >
+        Contact Us
+      </motion.button>
+
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="md:hidden p-2 rounded-lg bg-gray-100 text-gray-600"
+      >
+        <svg
+          className="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          {mobileMenuOpen ? (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          ) : (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          )}
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {/* Updated Mobile Menu - Centered */}
+  <motion.div
+    initial={{ height: 0, opacity: 0 }}
+    animate={{
+      height: mobileMenuOpen ? "auto" : 0,
+      opacity: mobileMenuOpen ? 1 : 0,
+    }}
+    transition={{ duration: 0.3 }}
+    className="md:hidden overflow-hidden bg-white border-b border-gray-100"
+  >
+    <div className="flex flex-col items-center p-6 gap-3">
+      {["Home", "Products", "Upcoming", "Services", "Team"].map((item, index) => (
+        <motion.button
+          key={item}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: mobileMenuOpen ? 1 : 0, y: mobileMenuOpen ? 0 : -10 }}
+          transition={{ delay: index * 0.05 }}
+          onClick={() => scrollTo(item.toLowerCase())}
+          className="text-gray-600 py-2 text-center font-medium hover:text-[#1B6B7A] transition-colors text-base w-full max-w-[200px]"
+        >
+          {item}
+        </motion.button>
+      ))}
+      <motion.button
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: mobileMenuOpen ? 1 : 0, scale: mobileMenuOpen ? 1 : 0.9 }}
+        transition={{ delay: 0.2 }}
+        className="bg-gradient-to-r from-[#1B4F6E] to-[#2E8A99] text-white px-6 py-2.5 rounded-full text-sm font-semibold w-auto min-w-[160px] mt-4 shadow-md hover:shadow-lg transition-all"
+      >
+        Contact Us
+      </motion.button>
+    </div>
+  </motion.div>
+</motion.nav>
   );
 };
 
@@ -1189,91 +1228,99 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-gray-300 py-8 px-6">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-6">
-        <div className="flex items-center gap-2 mb-3">
-          <img
-            src="/logo.jpeg"
-            alt="NEXUS VENTURES Logo"
-            className="w-8 h-8 rounded-lg object-cover shadow-md"
-          />
-          <span className="text-white text-lg font-bold">NEXUS VENTURES</span>
+      <div className="max-w-7xl mx-auto">
+        {/* Mobile: Centered, Desktop: Grid layout */}
+        <div className="flex flex-col md:grid md:grid-cols-4 gap-6 text-center md:text-left">
+          
+          {/* Logo Section - Centered on mobile */}
+          <div className="flex flex-col items-center md:items-start mb-4 md:mb-0">
+            <div className="flex items-center gap-2">
+              <img
+                src="/logo.jpeg"
+                alt="NEXUS VENTURES Logo"
+                className="w-8 h-8 rounded-lg object-cover shadow-md"
+              />
+              <span className="text-white text-lg font-bold">NEXUS VENTURES</span>
+            </div>
+          </div>
+
+          {/* Explore Section - Centered on mobile */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-sm">Explore</h4>
+            <ul className="space-y-1.5 text-xs text-gray-400">
+              <li
+                onClick={() => scrollToSection("products")}
+                className="hover:text-white cursor-pointer transition inline-block md:block"
+              >
+                Products
+              </li>
+              <li
+                onClick={() => scrollToSection("services")}
+                className="hover:text-white cursor-pointer transition inline-block md:block ml-4 md:ml-0"
+              >
+                Services
+              </li>
+              <li
+                onClick={() => scrollToSection("team")}
+                className="hover:text-white cursor-pointer transition inline-block md:block ml-4 md:ml-0"
+              >
+                Team
+              </li>
+              <li
+                onClick={() => scrollToSection("careers")}
+                className="hover:text-white cursor-pointer transition inline-block md:block ml-4 md:ml-0"
+              >
+                Careers
+              </li>
+            </ul>
+          </div>
+
+          {/* Products Section - Centered on mobile */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-sm">Products</h4>
+            <ul className="space-y-1.5 text-xs text-gray-400">
+              <li
+                onClick={() => window.open(productLinks.PocketStor, "_blank")}
+                className="hover:text-white cursor-pointer transition inline-block md:block"
+              >
+                PocketStor
+              </li>
+              <li
+                onClick={() => window.open(productLinks["Phasil.com"], "_blank")}
+                className="hover:text-white cursor-pointer transition inline-block md:block ml-4 md:ml-0"
+              >
+                Phasil.com
+              </li>
+              <li
+                onClick={() => scrollToSection("products")}
+                className="hover:text-white cursor-pointer transition inline-block md:block ml-4 md:ml-0"
+              >
+                Nexve ERP
+              </li>
+              <li
+                onClick={() => scrollToSection("products")}
+                className="hover:text-white cursor-pointer transition inline-block md:block ml-4 md:ml-0"
+              >
+                Nexve POS
+              </li>
+            </ul>
+          </div>
+
+          {/* Connect Section - Centered on mobile */}
+          <div>
+            <h4 className="text-white font-semibold mb-3 text-sm">Connect</h4>
+            <ul className="space-y-1.5 text-xs text-gray-400">
+              <li>NEXUS VENTURES LLC, 2nd Floor,</li>
+              <li>Flat No.: 235, Binnamangala, Indiranagar,</li>
+              <li>Bengaluru, 560038</li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h4 className="text-white font-semibold mb-3 text-sm">Explore</h4>
-          <ul className="space-y-1.5 text-xs text-gray-400">
-            <li
-              onClick={() => scrollToSection("products")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              Products
-            </li>
-            <li
-              onClick={() => scrollToSection("services")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              Services
-            </li>
-            <li
-              onClick={() => scrollToSection("team")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              Team
-            </li>
-            <li
-              onClick={() => scrollToSection("careers")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              Careers
-            </li>
-          </ul>
+        {/* Copyright Section - Centered on all screens */}
+        <div className="border-t border-gray-800 mt-6 pt-5 text-center text-gray-500 text-xs">
+          © {currentYear} NEXUS VENTURES LLC | All Rights Reserved
         </div>
-
-        <div>
-          <h4 className="text-white font-semibold mb-3 text-sm">Products</h4>
-          <ul className="space-y-1.5 text-xs text-gray-400">
-            <li
-              onClick={() => window.open(productLinks.PocketStor, "_blank")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              PocketStor
-            </li>
-            <li
-              onClick={() => window.open(productLinks["Phasil.com"], "_blank")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              Phasil.com
-            </li>
-            <li
-              onClick={() => scrollToSection("products")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              Nexve ERP
-            </li>
-            <li
-              onClick={() => scrollToSection("products")}
-              className="hover:text-white cursor-pointer transition"
-            >
-              Nexve POS
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-white font-semibold mb-3 text-sm">Connect</h4>
-          <ul className="space-y-1.5 text-xs text-gray-400">
-            <li>NEXUS VENTURES LLC, 2nd Floor,</li>
-            <li>Flat No.: 235, Binnamangala, Indiranagar,</li>
-            <li>Bengaluru, 560038</li>
-            <li className="text-xs mt-2">
-              © {currentYear} NEXUS VENTURES LLC | All Rights Reserved
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-gray-800 mt-6 pt-5 text-center text-gray-500 text-xs">
-        © {currentYear} NEXUS VENTURES LLC | All Rights Reserved
       </div>
     </footer>
   );
